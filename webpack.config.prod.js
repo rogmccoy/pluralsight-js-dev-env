@@ -16,22 +16,23 @@ export default {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
+    // filename: '[name].js'
     filename: '[name].[chunkhash].js'
   },
   plugins: [
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
 
-    // Hash the files using MD5 so that their names change when the content changes.
+    // // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
 
-    // Use CommonsChunkPlugin to create a separate bundle
-    // of vendor libraries so that they're cached separately.
+    // // Use CommonsChunkPlugin to create a separate bundle
+    // // of vendor libraries so that they're cached separately.
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
 
-    // Create HTML file that includes reference to bundled JS.
+    // // Create HTML file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: {
@@ -49,7 +50,7 @@ export default {
       inject: true,
       // Properties you define here are available in index.html
       // using htmlWebpackPlugin.options.varName
-      trackJSToken: 'INSERT YOUR TOKEN HERE'
+      // trackJSToken: 'INSERT YOUR TOKEN HERE'
     }),
 
     // Eliminate duplicate packages when generating bundle
@@ -61,6 +62,7 @@ export default {
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
+      // {test: /\.css$/, loaders: ['style','css']}
       {test: /\.css$/, loader: ExtractTextPlugin.extract('css?sourceMap')}
     ]
   }

@@ -12,6 +12,8 @@ export function deleteUser(id) {
 }
 
 function get(url) {
+  // this makes the call to the url that returns the data, in this example: http://localhost:3000/users
+  // return fetch(url).then(onSuccess, onError);
   return fetch(baseUrl + url).then(onSuccess, onError);
 }
 
